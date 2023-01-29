@@ -1,4 +1,5 @@
 const cases = document.querySelectorAll('.case')
+let play = true
 let controller = {
     clickeds : false,
     caseClicked : undefined,
@@ -12,33 +13,40 @@ class CaseControl{
         this.image = image
     }
     static clicks(a){
-        if(!controller.clickeds){
-            controller.clickeds = true
-            controller.caseClicked = list[a].image
-            controller.el = list[a].htmlEl
-            list[a].htmlEl.firstChild.style.visibility = 'visible'
-        }
-        else if(controller.clickeds){
-            if(list[a].image == controller.caseClicked){
-                color(0, list[a].htmlEl, controller.el, a )
-                controller.clickeds = false
-                controller.caseClicked = undefined
+        if(play){
+            if(!controller.clickeds){
+                controller.clickeds = true
+                controller.caseClicked = list[a].image
+                controller.el = list[a].htmlEl
                 list[a].htmlEl.firstChild.style.visibility = 'visible'
-                list[a].htmlEl.removeAttribute('onclick')
-                controller.el.removeAttribute('onclick')
-                return
             }
-            else{
-                color(1, list[a].htmlEl, controller.el, a)
-                controller.clickeds = false
-                list[a].htmlEl.firstChild.style.visibility = 'visible'
-                setTimeout(()=>{
-                    controller.el.firstChild.style.visibility = 'hidden'
-                    list[a].htmlEl.firstChild.style.visibility = 'hidden'
-                    controller.el = undefined
+            else if(controller.clickeds){
+                if(list[a].image == controller.caseClicked){
+                    color(0, list[a].htmlEl, controller.el, a )
+                    controller.clickeds = false
                     controller.caseClicked = undefined
-                },1200)
+                    list[a].htmlEl.firstChild.style.visibility = 'visible'
+                    list[a].htmlEl.removeAttribute('onclick')
+                    controller.el.removeAttribute('onclick')
+                    return
+                }
+                else{
+                    play = false
+                    color(1, list[a].htmlEl, controller.el, a)
+                    controller.clickeds = false
+                    list[a].htmlEl.firstChild.style.visibility = 'visible'
+                    setTimeout(()=>{
+                        controller.el.firstChild.style.visibility = 'hidden'
+                        list[a].htmlEl.firstChild.style.visibility = 'hidden'
+                        controller.el = undefined
+                        controller.caseClicked = undefined
+                        play = true
+                    },1200)
+                }
             }
+        }
+        else{
+
         }
     }
 }
