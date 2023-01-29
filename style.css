@@ -1,0 +1,33 @@
+#head{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+#container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(200px, 350px, 450px);
+    height: clamp(200px, 350px, 450px);
+    border: 1px grey solid;
+    border-radius: 25px;
+    box-shadow: gray 4px 4px 4px;
+}
+.case{
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    width: 70%;
+    height: 70%;
+    border: 1px grey solid;
+    border-radius: 15px;
+    box-shadow: gray 4px 4px 4px;
+}
+.case:hover{
+    opacity: 0.5;
+}
